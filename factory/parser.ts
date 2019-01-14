@@ -14,6 +14,7 @@ import { BooleanTypeNodeParser } from "../src/NodeParser/BooleanTypeNodeParser";
 import { CallExpressionParser } from "../src/NodeParser/CallExpressionParser";
 import { EnumNodeParser } from "../src/NodeParser/EnumNodeParser";
 import { ExpressionWithTypeArgumentsNodeParser } from "../src/NodeParser/ExpressionWithTypeArgumentsNodeParser";
+import { FunctionTypeNodeParser } from "../src/NodeParser/FunctionTypeNodeParser";
 import { IndexedAccessTypeNodeParser } from "../src/NodeParser/IndexedAccessTypeNodeParser";
 import { InterfaceNodeParser } from "../src/NodeParser/InterfaceNodeParser";
 import { IntersectionNodeParser } from "../src/NodeParser/IntersectionNodeParser";
@@ -36,6 +37,7 @@ import { TypeOperatorNodeParser } from "../src/NodeParser/TypeOperatorNodeParser
 import { TypeReferenceNodeParser } from "../src/NodeParser/TypeReferenceNodeParser";
 import { UndefinedTypeNodeParser } from "../src/NodeParser/UndefinedTypeNodeParser";
 import { UnionNodeParser } from "../src/NodeParser/UnionNodeParser";
+import { VoidNodeParser } from "../src/NodeParser/VoidNodeParser";
 import { SubNodeParser } from "../src/SubNodeParser";
 import { TopRefNodeParser } from "../src/TopRefNodeParser";
 
@@ -70,6 +72,7 @@ export function createParser(program: ts.Program, config: Config): NodeParser {
         .addNodeParser(new AnyTypeNodeParser())
         .addNodeParser(new UndefinedTypeNodeParser())
         .addNodeParser(new ObjectTypeNodeParser())
+        .addNodeParser(new VoidNodeParser())
 
         .addNodeParser(new StringLiteralNodeParser())
         .addNodeParser(new NumberLiteralNodeParser())
@@ -90,6 +93,7 @@ export function createParser(program: ts.Program, config: Config): NodeParser {
         .addNodeParser(new UnionNodeParser(typeChecker, chainNodeParser))
         .addNodeParser(new IntersectionNodeParser(typeChecker, chainNodeParser))
         .addNodeParser(new TupleNodeParser(typeChecker, chainNodeParser))
+        .addNodeParser(new FunctionTypeNodeParser(typeChecker, chainNodeParser))
         .addNodeParser(new OptionalTypeNodeParser(chainNodeParser))
         .addNodeParser(new RestTypeNodeParser(chainNodeParser))
 
