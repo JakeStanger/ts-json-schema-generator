@@ -4,7 +4,7 @@ export class ReferenceType extends BaseType {
     private type: BaseType;
 
     public getId(): string {
-        return this.type.getId();
+        return this.type && this.type.getId();
     }
 
     public getType(): BaseType {
